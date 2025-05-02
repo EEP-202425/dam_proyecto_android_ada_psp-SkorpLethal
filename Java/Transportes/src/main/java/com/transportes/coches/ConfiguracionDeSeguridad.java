@@ -17,28 +17,28 @@ import com.transportes.coches.utils.JwtRequestFilter;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class ConfiguracionDeSeguridad {
 
     private final UsuarioDetailsService usuarioDetailsService;
     private final JwtRequestFilter requestFilter;
 
-    public SecurityConfig(UsuarioDetailsService usuarioDetailsService, JwtRequestFilter requestFilter) {
+    public ConfiguracionDeSeguridad(UsuarioDetailsService usuarioDetailsService, JwtRequestFilter requestFilter) {
         this.usuarioDetailsService = usuarioDetailsService;
         this.requestFilter = requestFilter;
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder codificadorContrasenia() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+	public AuthenticationManager administradorAutenticacion(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filtroSeguridad(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth

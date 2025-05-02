@@ -29,22 +29,22 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody DTOUsuario dto) {
-		Optional<Usuario> user = usuarioRepository.findByNombre(dto.getNombre());
-		if (user.isEmpty()) {
+		Optional<Usuario> usuarioOpcional = usuarioRepository.findByNombre(dto.getNombre());
+		if (usuarioOpcional.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado.");
 		}
-		Usuario _user = user.get();
-		if (!encoder.matches(dto.getContrasenia(), _user.getContrasenia())) {
+		Usuario usuario = usuarioOpcional.get();
+		if (!encoder.matches(dto.getContrasenia(), usuario.getContrasenia())) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La contraseña no es correcta.");
 		}
-		String token = jwtUtil.generateToken(dto.getNombre());
+		String token = jwtUtil.generarToken(dto.getNombre());
 		return ResponseEntity.ok(Collections.singletonMap("token", token));
 	}
 
 	@PostMapping("/registro")
 	public ResponseEntity<String> registro(@RequestBody DTOUsuario dto) {
-		Optional<Usuario> user = usuarioRepository.findByNombre(dto.getNombre());
-		if (!user.isEmpty()) {
+		Optional<Usuario> usuarioOpcional = usuarioRepository.findByNombre(dto.getNombre());
+		if (!usuarioOpcional.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe.");
 		}
 		Usuario nuevoUsuario = new Usuario();

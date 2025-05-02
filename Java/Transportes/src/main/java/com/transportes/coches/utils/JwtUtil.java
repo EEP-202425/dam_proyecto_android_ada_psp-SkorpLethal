@@ -13,7 +13,7 @@ public class JwtUtil {
 
 	 private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // clave aleatoria segura
 
-	    public String generateToken(String username) {
+	    public String generarToken(String username) {
 	        return Jwts.builder()
 	                .setSubject(username)
 	                .setIssuedAt(new Date())
@@ -22,7 +22,7 @@ public class JwtUtil {
 	                .compact();
 	    }
 
-	    public String extractUsername(String token) {
+	    public String extraerNombreUsuario(String token) {
 	        return Jwts.parserBuilder()
 	                .setSigningKey(key)
 	                .build()
@@ -31,9 +31,9 @@ public class JwtUtil {
 	                .getSubject();
 	    }
 
-	    public boolean validateToken(String token, String expectedUsername) {
+	    public boolean validarToken(String token, String expectedUsername) {
 	        try {
-	            String username = extractUsername(token);
+	            String username = extraerNombreUsuario(token);
 	            return username.equals(expectedUsername);
 	        } catch (JwtException e) {
 	            return false;
