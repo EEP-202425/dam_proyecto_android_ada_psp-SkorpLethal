@@ -1,5 +1,6 @@
 package com.transportes.coches.controllers;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.transportes.coches.dto.DTOUsuario;
 import com.transportes.coches.models.Usuario;
 import com.transportes.coches.repositories.UsuarioRepository;
+import com.transportes.coches.utils.JwtUtil;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,22 +24,33 @@ public class AuthController {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private PasswordEncoder encoder;
-	
+	@Autowired
+	private JwtUtil jwtUtil;
+
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody DTOUsuario usuario) {
-	Optional<Usuario> user = usuarioRepository.findByNombre(usuario.getNombre());
-	if(user.isEmpty()) {
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado.");
-	}
-	Usuario _user = user.get();
-	if(!encoder.matches(usuario.getContrasenia(), _user.getContrasenia())) {
-		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La contraseña no es correcta.");
-	}
-	return ResponseEntity.ok("Login correcto.");
-	    }
-		
-	@PostMapping("/registro")
-	public ResponseEntity<String> registro(@RequestBody DTOUsuario usuario){
-	return ResponseEntity.ok("Registro correcto.");
+	public ResponseEntity<?> login(@RequestBody DTOUsuario dto) {
+		Optional<Usuario> user = usuarioRepository.findByNombre(dto.getNombre());
+		if (user.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no encontrado.");
 		}
+		Usuario _user = user.get();
+		if (!encoder.matches(dto.getContrasenia(), _user.getContrasenia())) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("La contraseña no es correcta.");
+		}
+		String token = jwtUtil.generateToken(dto.getNombre());
+		return ResponseEntity.ok(Collections.singletonMap("token", token));
+	}
+
+	@PostMapping("/registro")
+	public ResponseEntity<String> registro(@RequestBody DTOUsuario dto) {
+		Optional<Usuario> user = usuarioRepository.findByNombre(dto.getNombre());
+		if (!user.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("El usuario ya existe.");
+		}
+		Usuario nuevoUsuario = new Usuario();
+		nuevoUsuario.setNombre(dto.getNombre());
+		nuevoUsuario.setContrasenia(encoder.encode(dto.getContrasenia()));
+		usuarioRepository.save(nuevoUsuario);
+		return ResponseEntity.ok("Registro correcto.");
+	}
 }
