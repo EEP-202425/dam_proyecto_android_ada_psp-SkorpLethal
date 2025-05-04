@@ -31,11 +31,9 @@ public class Modelo {
     @JsonBackReference
     private Marca marca;
 
-    // Constructor vacío
     public Modelo() {
     }
 
-    // Constructor completo
     public Modelo(Long id, String nombre, String descripcion, Double precioBase, Marca marca) {
         this.id = id;
         this.nombre = nombre;
@@ -43,8 +41,6 @@ public class Modelo {
         this.precioBase = precioBase;
         this.marca = marca;
     }
-
-    // Getters y Setters
 
     public Long getId() {
         return id;

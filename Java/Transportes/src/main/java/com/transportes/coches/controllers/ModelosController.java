@@ -38,19 +38,21 @@ public class ModelosController {
 		Optional<Modelo> modelo = modeloRepository.findById(id);
 		return modelo.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
-//	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<Modelo> actualizar(@PathVariable Long id, @RequestBody Modelo actualizado){
-//		return modeloRepository.findById(id).map(existente -> {
-//			existente.setNombre(actualizado.getNombre());
-//			return ResponseEntity.ok(modeloRepository.save(existente));
-//		}).orElse(ResponseEntity.notFound().build());
-//	}
-//	
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<Void> eliminar(@PathVariable Long id){
-//		modeloRepository.deleteById(id);
-//		return ResponseEntity.noContent().build();
-//	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Modelo> actualizar(@PathVariable Long id, @RequestBody Modelo actualizado){
+		return modeloRepository.findById(id).map(existente -> {
+			existente.setNombre(actualizado.getNombre());
+			existente.setDescripcion(actualizado.getDescripcion());
+			existente.setPrecioBase(actualizado.getPrecioBase());
+			return ResponseEntity.ok(modeloRepository.save(existente));
+		}).orElse(ResponseEntity.notFound().build());
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> eliminar(@PathVariable Long id){
+		modeloRepository.deleteById(id);
+		return ResponseEntity.noContent().build();
+	}
 }
 

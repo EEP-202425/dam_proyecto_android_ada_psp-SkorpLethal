@@ -35,11 +35,9 @@ public class Marca {
     @JsonManagedReference
     private List<Modelo> modelos;
 
-    // Constructor vacío
     public Marca() {
     }
 
-    // Constructor completo
     public Marca(Long id, String nombre, String descripcion, String imagen, Integer anioFundacion, List<Modelo> modelos) {
         this.id = id;
         this.nombre = nombre;
@@ -48,8 +46,6 @@ public class Marca {
         this.anioFundacion = anioFundacion;
         this.modelos = modelos;
     }
-
-    // Getters y Setters
 
     public Long getId() {
         return id;
