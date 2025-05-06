@@ -27,7 +27,7 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
-	@PostMapping("/login")
+	@PostMapping(value = "/login", consumes = "application/json")
 	public ResponseEntity<?> login(@RequestBody DTOUsuario dto) {
 		Optional<Usuario> usuarioOpcional = usuarioRepository.findByNombre(dto.getNombre());
 		if (usuarioOpcional.isEmpty()) {
