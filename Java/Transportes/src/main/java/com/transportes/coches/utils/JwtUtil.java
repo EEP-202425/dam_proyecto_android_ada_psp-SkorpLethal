@@ -11,7 +11,9 @@ import java.security.Key;
 @Component
 public class JwtUtil {
 
-	 private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // clave aleatoria segura
+	private final String SECRET = "mi-super-clave-secreta-muy-larga-y-segura-para-firmar-jwts-123456"; // al menos 256 bits
+
+	private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
 	    public String generarToken(String username) {
 	        return Jwts.builder()
@@ -37,6 +39,21 @@ public class JwtUtil {
 	            return username.equals(expectedUsername);
 	        } catch (JwtException e) {
 	            return false;
+	        }
+	    }
+	    
+	    public boolean validarTokenExpirado(String token) {
+	        try {
+	            Date expiration = Jwts.parserBuilder()
+	                    .setSigningKey(key)
+	                    .build()
+	                    .parseClaimsJws(token)
+	                    .getBody()
+	                    .getExpiration();
+
+	            return expiration.before(new Date());
+	        } catch (JwtException e) {
+	            return true; // también lo tratamos como expirado si falla parsing
 	        }
 	    }
 	}

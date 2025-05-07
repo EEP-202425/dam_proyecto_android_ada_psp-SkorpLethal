@@ -81,6 +81,10 @@ public class Modelo {
     public void setMarca(Marca marca) {
         this.marca = marca;
     }
+    
+    public Long getMarcaId() {
+        return marca != null ? marca.getId() : null;
+    }
 }
 
 
