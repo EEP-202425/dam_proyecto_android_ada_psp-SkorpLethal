@@ -49,8 +49,7 @@ class LoginActivity : ComponentActivity() {
         json.put("nombre", nombre)
         json.put("contrasenia", contrasenia)
 
-        val tipoMedia = "applications/json; charset=utf-8".toMediaTypeOrNull()
-        val cuerpo = json.toString().toRequestBody(tipoMedia)
+        val cuerpo = json.toString().toRequestBody()
         val request = Request.Builder()
             .url(url)
             .post(cuerpo)

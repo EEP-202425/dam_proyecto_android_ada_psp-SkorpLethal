@@ -49,9 +49,9 @@ public class ConfiguracionDeSeguridad {
         	.and()
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-//            	.requestMatchers("/api/auth/**").permitAll()
-//                .anyRequest().authenticated()
-            	.anyRequest().permitAll()
+            	.requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated()
+//            	.anyRequest().permitAll()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
