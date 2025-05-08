@@ -24,29 +24,28 @@ import com.transportes.coches.utils.JwtRequestFilter;
 @EnableWebSecurity
 public class ConfiguracionDeSeguridad {
 
-    private final UsuarioDetailsService usuarioDetailsService;
     private final JwtRequestFilter requestFilter;
 
     public ConfiguracionDeSeguridad(UsuarioDetailsService usuarioDetailsService, JwtRequestFilter requestFilter) {
-        this.usuarioDetailsService = usuarioDetailsService;
         this.requestFilter = requestFilter;
     }
 
     @Bean
-    public PasswordEncoder codificadorContrasenia() {
+    PasswordEncoder codificadorContrasenia() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-	public AuthenticationManager administradorAutenticacion(AuthenticationConfiguration authConfig) throws Exception {
+	AuthenticationManager administradorAutenticacion(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
-    @Bean
-    public SecurityFilterChain filtroSeguridad(HttpSecurity http) throws Exception {
+
+	@Bean
+    SecurityFilterChain filtroSeguridad(HttpSecurity http) throws Exception {
         http
-        	.cors()
-        	.and()
+       // 	.cors()
+       // 	.and()
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/auth/**").permitAll()
@@ -60,7 +59,7 @@ public class ConfiguracionDeSeguridad {
     }
     
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfigurationSource corsConfigurationSource() {
     	CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("*")); 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

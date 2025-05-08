@@ -1,9 +1,11 @@
- package com.transportes.coches.models;
+package com.transportes.coches.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,16 +32,22 @@ public class Modelo {
     @JoinColumn(name = "id_marca", nullable = false)
     @JsonBackReference
     private Marca marca;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "id_color", nullable = false)    
+    private Color color;
+    
     public Modelo() {
+    	
     }
 
-    public Modelo(Long id, String nombre, String descripcion, Double precioBase, Marca marca) {
+    public Modelo(Long id, String nombre, String descripcion, Double precioBase, Marca marca, Color color) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precioBase = precioBase;
         this.marca = marca;
+        this.color = color;
     }
 
     public Long getId() {
@@ -82,8 +90,25 @@ public class Modelo {
         this.marca = marca;
     }
     
+
+	public Color getColor() {
+	    return color;
+	}
+	
+	public void setColor(Color color) {
+	    this.color = color;
+	}
+    
     public Long getMarcaId() {
         return marca != null ? marca.getId() : null;
+    }
+    
+    public Long getColorId() {
+        return color != null ? color.getId() : null;
+    }
+    
+    public double getPrecioTotal() {
+        return precioBase + (color != null ?  color.getPrecio(): 0);
     }
 }
 

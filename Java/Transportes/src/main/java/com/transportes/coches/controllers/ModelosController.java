@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.transportes.coches.models.Color;
 import com.transportes.coches.models.Modelo;
+import com.transportes.coches.repositories.ColoresRepository;
 import com.transportes.coches.repositories.ModelosRepository;
 
 @RestController
@@ -22,6 +24,9 @@ public class ModelosController {
 
 	@Autowired
 	private ModelosRepository modeloRepository;
+	
+	@Autowired
+	private ColoresRepository coloresRepository;
 	
 	@PostMapping
 	public ResponseEntity<Modelo> crear(@RequestBody Modelo modelo){
@@ -45,6 +50,14 @@ public class ModelosController {
 			existente.setNombre(actualizado.getNombre());
 			existente.setDescripcion(actualizado.getDescripcion());
 			existente.setPrecioBase(actualizado.getPrecioBase());
+
+	        // Obtener el color de la base de datos
+	        Long idColor = actualizado.getColor() != null ? actualizado.getColor().getId() : null;
+	        if (idColor != null) {
+	            Color color = coloresRepository.findById(idColor)
+	                .orElseThrow(() -> new RuntimeException("Color no encontrado con id: " + idColor));
+	            existente.setColor(color);
+	        }
 			return ResponseEntity.ok(modeloRepository.save(existente));
 		}).orElse(ResponseEntity.notFound().build());
 	}
