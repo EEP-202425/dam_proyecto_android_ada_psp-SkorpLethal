@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fondoOscuro"
-    android:padding="24dp">
+    style="@style/PantallaOscura">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,28 +10,7 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Logo -->
-        <ImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/auto"
-            android:contentDescription="Logo"
-            android:layout_marginTop="32dp" />
-
-        <!-- Título -->
-        <TextView
-            android:id="@+id/textTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Transportes App"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/textoClaro"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp" />
-
-        <!-- Usuario -->
+        <!-- Nombre de usuario -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -43,7 +21,7 @@
                 android:id="@+id/textNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textoClaro" />
+                style="@style/MyEditText" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Contraseña -->
@@ -59,25 +37,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textColor="@color/textoClaro" />
+                style="@style/MyEditText" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Botón Login -->
+        <!-- Repite contraseña -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repite Contraseña"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPasswordRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                style="@style/MyEditText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón registrar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="Registrar usuario"
             style="@style/MyButton"
-            android:text="Iniciar sesión"
             android:textAllCaps="false" />
 
-        <!-- Registro -->
+        <!-- Ir a login -->
         <TextView
-            android:id="@+id/textViewRegistro"
+            android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿No tienes cuenta? Regístrate aquí"
+            android:text="¿Ya tienes cuenta? Iniciar Sesión aquí"
             android:textColor="@color/indigo_accent"
             android:paddingTop="24dp"
             android:layout_gravity="center_horizontal"
