@@ -1,26 +1,92 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="12dp"
-    android:orientation="vertical"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/fondoOscuro"
+    app:cardCornerRadius="12dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/blanco"
+    app:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/textNombreModelo"
-        android:textStyle="bold"
-        android:textSize="18sp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textDescripcionModelo"
-        android:textSize="14sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/textNombreModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del modelo"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/blanco" />
 
-    <TextView
-        android:id="@+id/textPrecioBaseModelo"
-        android:textSize="14sp"
-        android:textColor="#888888"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/textDescripcionModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/blanco" />
+
+        <!-- Precio Base-->
+        <TextView
+            android:id="@+id/textPrecioBaseModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio base: 10000€"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            android:textColor="#CCCCCC" />
+
+        <TextView
+            android:id="@+id/textPrecioTotalModelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Precio total: 10000€"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"
+            android:textColor="#CCCCCC" />
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditarModelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:textAllCaps="false"
+                android:minWidth="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:cornerRadius="8dp"
+                style="@style/MyButton" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEliminarModelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eliminar"
+                android:textAllCaps="false"
+                android:minWidth="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:layout_marginStart="8dp"
+                app:cornerRadius="8dp"
+                style="@style/MyButton"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
