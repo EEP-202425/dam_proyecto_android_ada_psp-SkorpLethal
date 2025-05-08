@@ -1,4 +1,4 @@
-package com.alexmoreno.transportes.models
+package com.alexmoreno.transportes.modelos
 
 data class Marca(
     val id: Long,

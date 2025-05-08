@@ -1,11 +1,11 @@
-package com.alexmoreno.transportes.adapters
+package com.alexmoreno.transportes.adaptadores
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.alexmoreno.transportes.models.Modelo
+import com.alexmoreno.transportes.modelos.Modelo
 import com.alexmoreno.transportes.R
 
 class ModeloAdapter(

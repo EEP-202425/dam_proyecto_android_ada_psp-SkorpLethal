@@ -1,4 +1,4 @@
-package com.alexmoreno.transportes.adapters
+package com.alexmoreno.transportes.adaptadores
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.alexmoreno.transportes.R
-import com.alexmoreno.transportes.models.Marca
+import com.alexmoreno.transportes.modelos.Marca
 
 class MarcaAdapter(
     private val marcas: List<Marca>,
