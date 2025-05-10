@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Botón principal con fondo índigo y texto blanco -->
+    <style name="MyButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/blanco</item>
+        <item name="backgroundTint">@color/fucsiaPrincipal</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- EditText con contorno índigo y texto claro sobre fondo oscuro -->
+    <style name="MyEditText" parent="Widget.MaterialComponents.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">@color/textoClaro</item>
+        <item name="android:backgroundTint">@color/indigo_500</item>
+    </style>
+
+    <!-- Estilo general de ScrollView o pantallas con fondo oscuro -->
+    <style name="PantallaOscura">
+        <item name="android:background">@color/fondoOscuro</item>
+        <item name="android:padding">24dp</item>
+    </style>
+
+    <!-- Estilo para títulos principales -->
+    <style name="TextoTitulo">
+        <item name="android:textColor">@color/indigo_accent</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SpinnerDarkOverlay" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+</resources>
