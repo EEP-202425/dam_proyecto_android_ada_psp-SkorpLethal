@@ -29,7 +29,7 @@ Una aplicación completa para la gestión de marcas y modelos de vehículos desa
 
 ### Backend:
 
-- Java 17
+- Java 23
 - Spring Boot
 - Spring Security + JWT
 - JPA/Hibernate
@@ -50,6 +50,7 @@ Una aplicación completa para la gestión de marcas y modelos de vehículos desa
 transportes/
 ├── backend/ (Spring Boot)
 └── frontend/ (Android Kotlin)
+└── base de datos/ (MySQL)
 ```
 
 ---
@@ -60,7 +61,7 @@ transportes/
 
 - `Marca`: id, nombre, descripcion, imagen, anioFundacion, List<Modelo>
 - `Modelo`: id, nombre, descripcion, precioBase, color, marca
-- `Color`: id, descripcion
+- `Color`: id, descripcion, precio
 - `Usuario`: para autenticación y roles
 
 ### Repositorios:
@@ -74,8 +75,8 @@ Clases `@Service` que contienen la lógica de negocio. Validaciones, asociacione
 ### Controladores REST:
 
 - `/api/marcas` (GET, POST, PUT, DELETE)
-- `/api/modelos`
-- `/api/colores`
+- `/api/modelos` (GET, POST, PUT, DELETE)
+- `/api/colores` (GET)
 - `/api/auth` para login con JWT
 
 ### Seguridad (JWT):
@@ -91,7 +92,7 @@ Clases `@Service` que contienen la lógica de negocio. Validaciones, asociacione
 ### Pantallas:
 
 - LoginActivity
-- HomeActivity
+- RegistroActivity
 - MarcaActivity (Crear, editar, consultar marca y sus modelos)
 - ModeloActivity (Crear, editar, consultar modelo)
 
