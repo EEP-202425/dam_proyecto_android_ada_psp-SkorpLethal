@@ -3,93 +3,103 @@ package com.alexmoreno.transportes
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
-import okhttp3.Call
-import okhttp3.Callback
-import org.json.JSONObject
-import java.io.IOException
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.alexmoreno.transportes.api.ApiClient
+import androidx.core.content.edit
 
+/**
+ * LoginActivity
+ * Pantalla de inicio de sesión para acceder a la aplicación.
+ */
 class LoginActivity : ComponentActivity() {
 
-    private val cliente = OkHttpClient()
+    // Lanzador para el registro de nuevos usuarios
+    private lateinit var registroLauncher: ActivityResultLauncher<Intent>
+
+    // Referencias a los campos de texto y botones
+    private lateinit var inputNombre: EditText
+    private lateinit var inputContrasenia: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var linkRegistro: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val textNombre = findViewById<EditText>(R.id.textNombre)
-        val textContrasenia = findViewById<EditText>(R.id.editTextPassword)
-        val botonLogin = findViewById<Button>(R.id.buttonLogin)
+        // Inicializar vistas
+        inicializarVista()
 
-        botonLogin.setOnClickListener{
-            val nombre = textNombre.text.toString().trim()
-            val contrasenia = textContrasenia.text.toString().trim()
+        // Configurar evento para botón de login
+        btnLogin.setOnClickListener {
+            val nombre = inputNombre.text.toString().trim()
+            val contrasenia = inputContrasenia.text.toString().trim()
 
-            if (nombre.isNotEmpty()&& contrasenia.isNotEmpty()){
+            if (nombre.isNotEmpty() && contrasenia.isNotEmpty()) {
                 login(nombre, contrasenia)
             } else {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                mostrarMensaje("Completa todos los campos")
+            }
+        }
+
+        // Configurar launcher para registro
+        registroLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                mostrarMensaje("Registro exitoso, ahora inicia sesión")
+
+                // Autocompleta el nombre si se pasa como extra
+                val nombre = result.data?.getStringExtra("nombre")
+                inputNombre.setText(nombre)
+                inputContrasenia.setText("")
+            }
+        }
+
+        // Redirigir a la pantalla de registro
+        linkRegistro.setOnClickListener {
+            val intent = Intent(this, RegistroActivity::class.java)
+
+
+            registroLauncher.launch(intent)
+        }
+    }
+
+    /**
+     * Inicializa las vistas de la interfaz.
+     */
+    private fun inicializarVista() {
+        inputNombre = findViewById(R.id.textNombre)
+        inputContrasenia = findViewById(R.id.editTextPassword)
+        btnLogin = findViewById(R.id.buttonLogin)
+        linkRegistro = findViewById(R.id.textViewRegistro)
+    }
+
+    /**
+     * Realiza la autenticación del usuario.
+     */
+    private fun login(nombre: String, contrasenia: String) {
+        ApiClient.Auth.login(nombre, contrasenia) { success, token, errorMessage ->
+            runOnUiThread {
+                if (success && token != null) {
+                    // Guardar token en preferencias para futuras llamadas autenticadas
+                    val prefs = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+                    prefs.edit { putString("token", token) }
+
+                    // Finalizar con resultado OK
+                    setResult(RESULT_OK)
+                    finish()
+                } else {
+                    mostrarMensaje(errorMessage ?: "Error desconocido")
+                }
             }
         }
     }
 
-    private fun login(nombre: String, contrasenia: String){
-        val url = "http://10.0.2.2:8080/api/auth/login"
-
-        val json = JSONObject()
-        json.put("nombre", nombre)
-        json.put("contrasenia", contrasenia)
-
-        val cuerpo = json.toString().toRequestBody()
-        val request = Request.Builder()
-            .url(url)
-            .post(cuerpo)
-            .addHeader("Content-Type", "application/json")
-            .build()
-
-        cliente.newCall(request).enqueue(object : Callback{
-            override fun onFailure(call: Call, e: IOException){
-                runOnUiThread{
-                    Toast.makeText(this@LoginActivity,"Error de red",Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onResponse(call: Call, response: Response){
-                val responseBody = response.body?.string()
-
-                runOnUiThread{
-                    if (response.isSuccessful && responseBody!=null){
-                        try {
-                            val jsonResponse = JSONObject(responseBody)
-                            val token = jsonResponse.getString("token")
-
-                            val prefs = getSharedPreferences(
-                                "MyAppPrefs",
-                                Context.MODE_PRIVATE
-                            )
-                            prefs.edit().putString("token", token).apply()
-
-                            Toast.makeText(this@LoginActivity, "Login exitoso", Toast.LENGTH_SHORT)
-                                .show()
-
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-
-                        } catch (e:Exception){
-                            Toast.makeText(this@LoginActivity,"Error al procesar la respuesta", Toast.LENGTH_SHORT).show()
-                        }
-                        } else {
-                            Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        })
+    /**
+     * Muestra un mensaje corto en pantalla.
+     */
+    private fun mostrarMensaje(mensaje: String) {
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
     }
 }

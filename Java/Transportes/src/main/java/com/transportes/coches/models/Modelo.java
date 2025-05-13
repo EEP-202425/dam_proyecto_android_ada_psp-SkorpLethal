@@ -111,5 +111,3 @@ public class Modelo {
         return precioBase + (color != null ?  color.getPrecio(): 0);
     }
 }
-
-
