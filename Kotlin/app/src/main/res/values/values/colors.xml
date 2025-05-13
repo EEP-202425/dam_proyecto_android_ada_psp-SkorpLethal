@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Paleta Indigo -->
+    <color name="indigo_50">#E8EAF6</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="indigo_500">#3F51B5</color>
+    <color name="indigo_700">#303F9F</color>
+    <color name="indigo_accent">#536DFE</color>
+
+    <color name="grisClaro">#B0BEC5</color>
+    <color name="grisMedio">#757575</color>
+
+    <color name="fucsiaPrincipal">#E91E63</color> <!-- Ejemplo de fucsia -->
+    <!-- Colores base -->
+    <color name="blanco">#FFFFFF</color>
+    <color name="negro">#000000</color>
+
+    <!-- Fondo oscuro general -->
+    <color name="fondoOscuro">#121212</color>
+
+    <!-- Texto -->
+    <color name="textoClaro">#F5F5F5</color>
+    <color name="textoSecundario">#B0BEC5</color>
+
+    <!-- Botones y controles -->
+    <color name="colorPrimary">@color/indigo_500</color>
+    <color name="colorPrimaryVariant">@color/indigo_700</color>
+    <color name="colorOnPrimary">@color/blanco</color>
+
+    <color name="colorSecondary">@color/indigo_accent</color>
+    <color name="colorOnSecondary">@color/blanco</color>
+
+</resources>

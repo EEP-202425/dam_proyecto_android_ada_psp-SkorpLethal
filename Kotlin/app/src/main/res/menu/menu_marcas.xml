@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:title="Buscar"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="Ordenar por"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/sort_nombre" android:title="Nombre" />
+            <item android:id="@+id/sort_anio" android:title="Año" />
+            <item android:id="@+id/sort_modelos" android:title="Nº Modelos" />
+        </menu>
+    </item>
+
+
+    <!-- Crear Marca -->
+    <item
+        android:id="@+id/action_add_marca"
+        android:title="Crear Marca"
+        app:showAsAction="never" />
+
+    <!-- Editar Perfil -->
+    <item
+        android:id="@+id/action_edit_perfil"
+        android:title="Editar Perfil"
+        app:showAsAction="never" />
+
+    <!-- Cerrar Sesión -->
+    <item
+        android:id="@+id/action_logout"
+        android:title="Cerrar sesión"
+        app:showAsAction="never" />
+</menu>

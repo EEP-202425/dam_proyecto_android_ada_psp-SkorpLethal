@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_sort"
+        android:title="Ordenar modelos por"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/sort_nombre" android:title="Nombre" />
+            <item android:id="@+id/sort_precioBase" android:title="Precio base" />
+            <item android:id="@+id/sort_precioTotal" android:title="Precio total" />
+        </menu>
+    </item>
+    <item android:id="@+id/action_guardar" android:title="Guardar" />
+    <item android:id="@+id/action_eliminar" android:title="Eliminar" />
+    <item android:id="@+id/action_nuevo_modelo" android:title="Nuevo Modelo" />
+    <item android:id="@+id/action_cancelar" android:title="Cancelar" />
+</menu>

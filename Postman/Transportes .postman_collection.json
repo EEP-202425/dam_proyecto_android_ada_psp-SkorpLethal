@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "b8448228-b03f-47fa-8706-1d44e99a3fb6",
+		"name": "Transportes ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44625364",
+		"_collection_link": "https://alexmoreno-9520001.postman.co/workspace/Alex-Moreno's-Workspace~e6dc0272-498b-4f0f-8411-8f41a26ad6f2/collection/44625364-b8448228-b03f-47fa-8706-1d44e99a3fb6?action=share&source=collection_link&creator=44625364"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/marcas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQZXBpdG8xOSIsImlhdCI6MTc0NjIwNjcwNiwiZXhwIjoxNzQ2MjQyNzA2fQ.s0m_ToaslEbGu0bQPab83UnsW0lmIchpl_53MWZWkB0",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/marcas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"marcas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/auth/login",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\" : \"Pepito19\",\r\n    \"contrasenia\" : \"Pepito19\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/auth/registro",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\" : \"Pepito19\",\r\n    \"contrasenia\" : \"Pepito19\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/registro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"registro"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

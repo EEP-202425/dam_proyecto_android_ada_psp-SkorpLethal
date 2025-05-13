@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoOscuro">
+
+    <!-- Barra superior con acciones -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fucsiaPrincipal"
+        android:title="Listado de Marcas"
+        android:titleTextColor="@color/blanco"
+        app:titleCentered="true"
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark" />
+
+    <!-- Lista de marcas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMarcas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+</LinearLayout>
