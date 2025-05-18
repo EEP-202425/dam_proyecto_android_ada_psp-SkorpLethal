@@ -21,10 +21,10 @@ import jakarta.servlet.http.HttpServletResponse;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtUtil jwtUtil;
+	private JwtUtil jwtUtil; // Utilidad para realizar operaciones con JWT
 
 	@Autowired
-	private UsuarioDetailsService usuarioDetails;
+	private UsuarioDetailsService usuarioDetails; //Servicio para cargar los detalles del usuario desde la base de datos
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

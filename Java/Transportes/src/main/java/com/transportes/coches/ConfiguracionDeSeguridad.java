@@ -24,7 +24,7 @@ import com.transportes.coches.utils.JwtRequestFilter;
 @EnableWebSecurity
 public class ConfiguracionDeSeguridad {
 
-    private final JwtRequestFilter requestFilter;
+    private final JwtRequestFilter requestFilter; //Filtro personalizado para la autenticación JWT
 
     public ConfiguracionDeSeguridad(UsuarioDetailsService usuarioDetailsService, JwtRequestFilter requestFilter) {
         this.requestFilter = requestFilter;
